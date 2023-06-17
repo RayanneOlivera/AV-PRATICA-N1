@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h1>Excluir um Funcionário</h1>
+
+<div>
+  {% if funcionarios %}
+  {% for funcionario in funcionarios %}
+
+  <li>
+    {{ funcionario.nome }}
+    <form action="/excluir-funcionario/{{ loop.index0 }}" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Excluir">
+    </form>
+  </li>
+
+  {% endfor %}
+  {% else %}
+
+  <h3>Não há funcionários</h3>
+
+  {% endif %}
+</div>
+{% endblock %}

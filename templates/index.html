@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <h1 style="font-size: 32px; color: #333;">Bem-vindo(a)!</h1>
+        <p style="font-size: 18px; color: #777;">Cadastre novos funcionários em nossa aplicação</p>
+        <p style="font-size: 16px; color: #888;">Sinta-se à vontade para explorar os recursos disponíveis</p>
+        <a href="{{ url_for('cadastrar_funcionario') }}" style="background-color: #6ac06a; color: white; border-radius: 4px; padding: 10px 20px; font-size: 16px; text-decoration: none;">Cadastrar Funcionário</a>
+    </div>
+{% endblock %}

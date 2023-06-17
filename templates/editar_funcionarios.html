@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Funcionário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Funcionário</h1>
+    <form action="{{ url_for('editar_funcionario', id=id) }}" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ funcionario['nome'] }}">
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" value="{{ funcionario['cidade'] }}">
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" value="{{ funcionario['estado'] }}">
+
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" name="cargo" value="{{ funcionario['cargo'] }}">
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

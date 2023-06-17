@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Funcionários</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .actions {
+            white-space: nowrap;
+        }
+        
+        .actions a,
+        .actions button {
+            margin-right: 5px;
+        }
+        
+        .actions button {
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+        
+        .actions button.edit {
+            background-color: #83d6f7;
+            color: white;
+        }
+        
+        .actions button.delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .actions button:hover {
+            opacity: 0.8;
+        }
+        
+        .actions button.edit:hover {
+            background-color: #61b6d4;
+        }
+        
+        .actions button.delete:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-green {
+            background-color: #6ac06a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            text-decoration: none;
+        }
+        
+        .btn-green:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Funcionários</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Cargo</th>
+                <th class="actions">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for funcionario in funcionarios %}
+            <tr>
+                <td>{{ funcionario['id'] }}</td>
+                <td>{{ funcionario['nome'] }}</td>
+                <td>{{ funcionario['cidade'] }}</td>
+                <td>{{ funcionario['estado'] }}</td>
+                <td>{{ funcionario['cargo'] }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('editar_funcionario', id=funcionario['id']) }}"><button class="edit">Editar</button></a>
+                    <form action="{{ url_for('excluir_funcionario', id=funcionario['id']) }}" method="POST" style="display:inline">
+                        <button class="delete" type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('cadastrar_funcionario') }}" class="btn-green">Cadastrar funcionário</a>
+</body>
+</html>

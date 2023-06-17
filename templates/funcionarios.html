@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Lista de Funcionários</h1>
+
+    <table><!DOCTYPE html>
+        <html>
+        <head>
+            <title>Funcionários</title>
+            <style>
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                
+                th, td {
+                    padding: 8px;
+                    text-align: left;
+                    border-bottom: 1px solid #ddd;
+                }
+                
+                th {
+                    background-color: #f2f2f2;
+                }
+                
+                .actions {
+                    white-space: nowrap;
+                }
+                
+                .actions a,
+                .actions button {
+                    margin-right: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Funcionários</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Cargo</th>
+                        <th class="actions">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for funcionario in funcionarios %}
+                    <tr>
+                        <td>{{ funcionario['id'] }}</td>
+                        <td>{{ funcionario['nome'] }}</td>
+                        <td>{{ funcionario['cidade'] }}</td>
+                        <td>{{ funcionario['estado'] }}</td>
+                        <td>{{ funcionario['cargo'] }}</td>
+                        <td class="actions">
+                            <a href="{{ url_for('editar_funcionario', id=funcionario['id']) }}">Editar</a>
+                            <form action="{{ url_for('excluir_funcionario', id=funcionario['id']) }}" method="POST" style="display:inline">
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('cadastrar_funcionario') }}">Cadastrar funcionário</a>
+        </body>
+        </html>
+        
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        {% if not funcionarios %}
+        <tbody>
+            <tr>
+                <td colspan="5">Nenhum funcionário cadastrado.</td>
+            </tr>
+        </tbody>
+        {% endif %}
+
+        {% for funcionario in funcionarios %}
+        <tbody>
+            <td>{{ funcionario['nome'] }}</td>
+            <td>{{ funcionario['cidade'] }}</td>
+            <td>{{ funcionario['estado'] }}</td>
+            <td>{{ funcionario['cargo'] }}</td>
+            <td>
+                <a href="/ver_funcionarios/{{ loop.index0 }}">Ver</a>
+                <a href="/editar/{{ loop.index0 }}">Editar</a>
+                <a href="/excluir/{{ loop.index0 }}">Excluir</a>
+            </td>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <a href="/cadastrar">Cadastrar Funcionários</a>
+{% endblock %}
